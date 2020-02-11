@@ -415,14 +415,8 @@ main {
   padding: 1rem;
 }
 
-/*Specific one-off styles*/
-
+/*Specific one-off/ID styles*/
 #about-me>.article-subheading {
   font-family: "Source Code Pro";
   color: orange;
-}
-
-#notification {
-  font-family: "Sourece Sans Pro";
-  color: red;
 }

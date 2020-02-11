@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "start:prod": "PORT=80 NODE_ENV=production SENDGRID_API_KEY=placeholder_key node server.js",
+    "start:prod": "source ./prod.env && PORT=80 NODE_ENV=production node server.js",
     "test": "mocha --timeout 5000",
     "dev": "nodemon server.js"
   },
