@@ -1,0 +1,428 @@
+/* TODO
+implement using SCSS
+use variables for UI transition times, light and dark colour switching
+make better use of inheritance and specificity, e.g. generic link plus navlink to reduce file size
+after creating proper data models for content, get the content css up to the same standard as the page layout css, at least
+  - perhaps content styles can be dynamically loaded with the content by the backend?
+  - content will be separated into proper and preview version, there will also be separate css for both (for use on an index page
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i&display=swap');
+:root {
+  --clr-primary: rgba(40, 40, 180, 1);
+  --clr-primary-light: rgba(40, 40, 240, 1);
+  --clr-primary-dark: rgba(44, 32, 128, 1);
+  --clr-primary-fade: rgba(120, 60, 240, 0.4);
+  --clr-accent: #41658a;
+  --clr-light: rgba(255, 255, 255, 1);
+  --clr-dark: rgb(54, 59, 59);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* Nesting the burger button in the header didn't make sense, but this value is required for positioning */
+  --header-height: 100px;
+  --header-padding: 1rem;
+  font-family: "Source Sans Pro";
+  font-weight: 400;
+  line-height: 1.5rem;
+  min-height: 100vh;
+  display: grid;
+  grid-template-areas: "header header header" "nav main main" "footer footer footer";
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: auto 1fr 4rem;
+  height: 100vh;
+}
+
+@media screen and (max-width: 720px) {
+  body {
+    --header-height: 80px;
+
+    grid-template-areas: "header" "main" "footer";
+    grid-template-columns: 100%;
+  }
+}
+
+/* GLOBAL */
+
+.container {
+  padding: 1rem 0;
+  width: 95%;
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 720px) {
+  .container {
+    max-width: initial;
+  }
+}
+
+.btn {
+  display: inline-block;
+  height: 2rem;
+  width: 5rem;
+  border: none;
+  cursor: pointer;
+}
+
+/* burger btns  */
+
+.btn-burger {
+  --burger-width: 4rem;
+  --burger-padding: 0.5rem;
+  --burger-patty-height: 4px;
+  --burger-patty-spacing: 10px;
+  height: var(--burger-width);
+  width: var(--burger-width);
+  padding: 0.5rem;
+}
+
+.burger-patty, .burger-patty::before, .burger-patty::after {
+  content: '';
+  display: block;
+  background-color: var(--clr-light);
+  width: calc(var(--burger-width) - 2*(var(--burger-padding)));
+  height: var(--burger-patty-height);
+}
+
+.burger-patty {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.burger-patty::before {
+  transform: translateY(calc((-1)*var(--burger-patty-spacing) - var(--burger-patty-height)));
+}
+
+.burger-patty::after {
+  transform: translateY(var(--burger-patty-spacing));
+}
+
+/* HEADER */
+
+.header {
+  grid-area: header;
+  display: block;
+  background-color: var(--clr-primary);
+  height: calc(var(--header-height) + 2*var(--header-padding));
+  z-index: 10;
+}
+
+.header-splash {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--header-height);
+  margin: var(--header-padding);
+}
+
+@media screen and (max-width: 720px) {
+  .header-splash {
+    float: right;
+  }
+}
+
+.header-portrait {
+  height: inherit;
+}
+
+.header-text {
+  color: var(--clr-light);
+  padding-left: 1rem;
+  font-family: 'Source Code Pro';
+  font-weight: 400;
+  font-size: 2.5rem;
+  line-height: 3rem;
+}
+
+.header-text>p:last-child {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 720px) {
+  .header-text {
+    line-height: 1rem;
+    font-size: 1rem;
+  }
+  .header-text>p:last-child {
+    font-size: 1.5rem;
+  }
+}
+
+/*Mobile Nav Button*/
+
+.nav__btn {
+  display: none;
+  position: fixed;
+  left: 1rem;
+  top: calc(0.5*var(--header-height) + var(--header-padding));
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  z-index: 12;
+}
+
+.nav__btn>.burger-patty, .nav__btn>.burger-patty::before, .nav__btn>.burger-patty::after {
+  box-shadow: 0 0 2px var(--clr-primary-dark), 0 0 4px var(--clr-primary-dark), 0 0 10px black;
+  /* bounce*/
+  transition: all 0.2s cubic-bezier(0.77, .83, .6, 1.3);
+}
+
+@media screen and (max-width: 720px) {
+  .nav__btn {
+    display: initial;
+  }
+}
+
+.nav__btn.active {
+  background-color: var(--clr-primary-dark);
+  box-shadow: 0 0 10px black inset;
+}
+
+.nav__btn.active>.burger-patty::before {
+  transform: rotate(45deg) translateY(2px);
+}
+
+.nav__btn.active>.burger-patty {
+  background-color: rgba(0, 0, 0, 0);
+  /*opacity applies to pseudoelements too*/
+}
+
+.nav__btn.active>.burger-patty::after {
+  transform: rotate(-45deg) translateY(-4px);
+  box-shadow: 0 0 10px black;
+}
+
+/*Navigation*/
+
+.nav-sidebar {
+  grid-area: nav;
+  --nav-width: 50vw;
+  z-index: 12;
+}
+
+@media screen and (max-width: 720px) {
+  .nav-sidebar {
+    position: fixed;
+    grid-area: none;
+    width: var(--nav-width);
+  }
+}
+
+.nav-primary {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: none;
+  transition: left 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.nav-primary::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  height: 80%;
+  width: 1px;
+  background-color: var(--clr-primary-dark);
+  transition: color 0.2s ease-in, box-shadow 0.2s ease-in;
+}
+
+@media screen and (max-width: 720px) {
+  .nav-primary {
+    position: fixed;
+    height: 100vh;
+    width: var(--nav-width);
+    left: calc((-1)*var(--nav-width));
+    padding-top: calc(var(--header-height) + 2*var(--header-padding));
+    background-color: var(--clr-primary);
+    box-shadow: -25px 0 80px black;
+  }
+  .nav-primary.active {
+    box-shadow: 10px 0 100px 20px black;
+    left: 0;
+  }
+}
+
+.nav-primary>ul {
+  width: inherit;
+}
+
+.nav-primary>ul>li {
+  display: block;
+  width: inherit;
+  height: 4rem;
+}
+
+.nav__link {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 500;
+  color: var(--clr-primary-fade);
+  text-shadow: 0 0 5px var(--clr-primary-dark), 0 0 20px var(--clr-dark);
+  /* 0 0 40px var(--clr-dark); */
+  transition: background-color 0.2s ease-out, color 0.2s ease-out, text-shadow 0.2s ease-out;
+}
+
+.nav__link.active, .nav__link:active, .nav__link:focus, .nav__link:hover {
+  color: var(--clr-primary-light);
+  background-color: none;
+  font-weight: 600;
+  text-shadow: none;
+}
+
+@media screen and (max-width: 720px) {
+  .nav__link {
+    font-weight: 600;
+    color: var(--clr-light);
+    text-shadow: none;
+  }
+  .nav__link.active, .nav__link:active, .nav__link:focus, .nav__link:hover {
+    background-color: var(--clr-light);
+    color: var(--clr-primary);
+  }
+}
+
+main {
+  grid-area: main;
+}
+
+.footer {
+  grid-area: footer;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: black;
+  font-weight: 200;
+}
+
+/* Content styles */
+
+.text-paragraph {
+  text-indent: 1rem;
+  font-size: 1.2rem;
+  line-height: 2rem;
+}
+
+.article-header {
+  font-family: "Source Code Pro";
+  color: var(--clr-primary);
+  font-size: 2rem;
+  padding: 0.5rem 0;
+  line-height: 2.5rem;
+}
+
+.article-subheader {
+  color: var(--clr-accent);
+  font-weight: normal;
+  font-style: italic;
+  font-size: 1.5rem;
+  padding: 0.25rem 0;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--clr-accent);
+}
+
+.link--dark {
+  color: var(--clr-accent);
+}
+
+.link--dark:hover {
+  color: var(--clr-primary);
+}
+
+.resume__github-card {
+  color: var(--clr-primary);
+}
+
+.resume__github-card:hover {
+  color: var(--clr-accent);
+}
+
+.resume__github-card img {
+  display: block;
+  margin: auto;
+  max-width: 8rem;
+}
+
+.resume__github-card figcaption {
+  text-align: center;
+}
+
+.resume__github-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.projects-figure {
+  display: block;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.projects-figure a, .projects-figure img, .projects-figure figcaption {
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+.blog-post>figure {
+  display: table;
+  float: right;
+  padding: 1rem;
+}
+
+.blog-post>figure>figcaption {
+  text-align: center;
+  opacity: 0.8;
+}
+
+.blog-post img {
+  padding: 0.5rem;
+  display: table-cell;
+  max-width: 40rem;
+}
+
+.project-link {
+  display: block;
+  margin: auto; 
+  text-align: center;
+  padding: 1rem;
+}
+
+/*Specific one-off styles*/
+
+#about-me>.article-subheading {
+  font-family: "Source Code Pro";
+  color: orange;
+}
+
+#notification {
+  font-family: "Sourece Sans Pro";
+  color: red;
+}

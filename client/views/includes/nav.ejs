@@ -1,0 +1,39 @@
+<aside class="nav-sidebar">
+  <nav class="nav-primary">
+    <ul>
+      <li><a href="/about" class="nav__link btn btn-nav <%= path === 'about' ? 'active' : '' %>">About</a></li>
+      <li><a href="/resume" class="nav__link btn btn-nav <%= path === 'resume' ? 'active' : '' %>">Resume</a></li>
+      <li><a href="/projects" class="nav__link btn btn-nav <%= path === 'projects' ? 'active' : '' %>">Projects</a>
+      </li>
+      <li><a href="/thinkery" class="nav__link btn btn-nav <%= path === 'thinkery' ? 'active' : '' %>">Thinkery</a>
+      </li>
+      <li><a href="/contact" class="nav__link btn btn-nav <%= path === 'contact'   ? 'active' : '' %>">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="btn btn-burger nav__btn">
+    <div class="burger-patty"><span></span></div>
+  </div>    
+  <script>
+    (function () {
+      let navToggle, sidebar, navPrimary;
+      if (!navToggle) {
+        navToggle = document.querySelector('.nav__btn');
+        navToggle.addEventListener('click', function () {
+          if (!sidebar) sidebar = document.querySelector('.nav-sidebar');
+          if (!navPrimary) navPrimary = document.querySelector('.nav-primary');
+
+          if (sidebar.classList.contains('active')) {
+            sidebar.classList.remove('active');
+            navToggle.classList.remove('active');
+            navPrimary.classList.remove('active');
+          } else {
+            sidebar.classList.add('active');
+            navToggle.classList.add('active');
+            navPrimary.classList.add('active');
+          }
+        })
+      }
+    })();
+
+  </script>
+</aside>

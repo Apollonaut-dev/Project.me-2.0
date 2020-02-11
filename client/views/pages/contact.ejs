@@ -1,0 +1,84 @@
+<section class="container form-container">
+  <h1 id="notification">2-Feb-2020: I made the rookie mistake of committing my SendGrid API key to git and my account was disabled. Therefore, this form will not work until SendGrid re-enables my account</h1>
+  <form class="form contact-form" onsubmit="event.preventDefault();">
+    <link rel="stylesheet" type="text/css" href="form.css" />
+    <h1 class="article-header form-title">Need a website built?</h1>
+    <div class="form-control input-name">
+      <label for="form-name">Name/Company</label>
+      <input id="form-name" name="name" type="text" />
+    </div>
+    <div class="form-control input-email">
+      <label for="form-email">Email</label>
+      <input id="form-email" name="email" type="text" />
+    </div>
+    <div class="form-control input-phone">
+      <label for="form-phone">Phone (optional)</label>
+      <input id="form-phone" name="phone" type="text" />
+    </div>
+    <div class="form-control input-message">
+      <label for="form-message">Message</label>
+      <input id="form-message" name="message" type="text" />
+    </div>
+
+    <button class="btn btn-form btn-form-submit">Submit</button>
+    <script>
+      (function () {
+        /* form submission handler */
+        const form = document.querySelector('.contact-form');
+        const submitBtn = form.querySelector('.btn-form-submit');
+        submitBtn.addEventListener('click', e => {
+          // grab input values
+          const name = form.elements[0].value;
+          const email = form.elements[1].value;
+          const phone = form.elements[2].value;
+          const message = form.elements[3].value;
+          // prepare request body
+          const data_str =
+            `name=${name}&email=${email}&phone=${phone}&message=${message}`;
+          
+          // initialize form UI (or re-initialize on invalidation)
+          form.elements[0].value = '';
+          form.elements[1].value = '';
+          form.elements[2].value = '';
+          form.elements[3].value = '';
+          form.elements[0].classList = '';
+          form.elements[1].classList = '';
+          form.elements[2].classList = '';
+          form.elements[3].classList = '';
+
+          submitBtn.innerHTML = '. . .';
+          submitBtn.blur();
+          // submit
+          fetch('/contact', {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            },
+            body: data_str
+          })
+            .then(res => res.json())
+            .then((data) => {
+              // client-side validation (for UX purposes only)
+              submitBtn.innerHTML = 'Submit';
+              if (data.errors.length > 0) {
+                data.errors.map(e => {
+                  if (e.param === 'name') {
+                    form.elements[0].classList.add('error');
+                  }
+                  if (e.param === 'email') {
+                    form.elements[1].classList.add('error');
+                  }
+                  if (e.param === 'phone') {
+                    form.elements[2].classList.add('error');
+                  }
+                  if (e.param === 'message') {
+                    form.elements[3].classList.add('error');
+                  }
+                });
+              }
+            });
+        });
+      })();
+    </script>
+  </form>
+</section>

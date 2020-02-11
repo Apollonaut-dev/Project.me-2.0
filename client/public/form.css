@@ -1,0 +1,59 @@
+.form-container {
+  display: block;
+  margin: auto;
+}
+
+.form {
+  /* border: 1px solid var(--clr-primary); */
+  padding: 1rem;
+  max-width: 40rem;
+
+}
+
+.form-title {
+  text-align: center;
+}
+
+.form-control {
+  width: 100%;
+  /* padding: 1rem; */
+  padding: 1rem;
+}
+
+.form-control > label {
+  color: var(--clr-accent);
+  font-family: "Source Code Pro";
+}
+
+.form-control > input {
+  display: block;
+  width: 100%;
+  line-height: 2rem;
+  font-size: 1.5rem;
+}
+
+.form-control > input.error {
+  outline: 2px solid red;
+}
+
+.btn-form {
+  display: inline-block;
+  margin-left: 1rem;
+  height: 3rem;
+  width: 8rem;
+  font-size: 1.2rem;
+  color: white;
+  background: var(--clr-accent);
+}
+
+.btn-form:hover,
+.btn-form:focus,
+.btn-form:active {
+  box-shadow: 0 0 5px 2px black inset;
+}
+
+.btn-form-submit {
+  display: block;
+  margin: auto;
+  background: var(--clr-primary);
+}

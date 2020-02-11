@@ -1,0 +1,41 @@
+{
+  "name": "personalpage-3.0",
+  "version": "3.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:prod": "PORT=80 NODE_ENV=production SENDGRID_API_KEY=placeholder_key node server.js",
+    "test": "mocha --timeout 5000",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Apollonaut-dev/Project.me.git"
+  },
+  "author": "Anthony de Vellis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Apollonaut-dev/Project.me/issues"
+  },
+  "homepage": "https://github.com/Apollonaut-dev/Project.me#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.7.2",
+    "express": "^4.17.1",
+    "express-validator": "^6.4.0",
+    "nodemailer": "^6.4.2",
+    "nodemailer-sendgrid-transport": "^0.2.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "jest": "^25.1.0",
+    "mocha": "^6.2.2",
+    "nodemon": "^1.19.4",
+    "sinon": "^7.5.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "description": "A personal server that serves my apps"
+}

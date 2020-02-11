@@ -1,0 +1,70 @@
+/* RESUME */
+#section-resume {
+	padding: 0;
+}
+
+#resume {
+	padding: 0;
+}
+
+#resume section {
+	padding: 0 2rem;
+}
+
+@media screen and (max-width: 720px) {
+	#resume section {
+		padding: 0 1rem;
+	}
+}
+
+#resume h3 {
+	font-family: "Source Code Pro";
+	font-size: 1.3rem;
+}
+
+#resume h4 {
+	display: inline-block;
+	font-family: "Source Code Pro";
+	font-size: 1.2rem;
+	line-height: 2rem;
+}
+
+#resume h5 {
+	display: inline-block;
+	float: right;
+	font-size: 1.0rem;
+	font-style: italic;
+	font-weight: 400;
+}
+/* 1300px is the point at which the table layout looks silly */
+@media screen and (max-width: 1300px) {
+	#resume h4 {
+		display: block;
+	}
+
+	#resume h5 {
+		display: block;
+		float: none;
+	}
+}
+
+#resume li {
+	margin-left: 2rem;
+	padding: 0.25rem 0;
+}
+
+#resume #work-experience ul {
+	list-style: none;
+}
+
+#resume #work-experience ul li {
+	margin-left: 0rem;
+}
+
+#resume #work-experience ul li ul {
+	list-style: disc outside;
+}
+
+#resume #work-experience ul li ul li {
+	margin-left: 2rem;
+}
