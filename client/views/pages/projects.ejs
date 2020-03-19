@@ -1,7 +1,11 @@
 <section class="container">
-  <figure class="resume__github-card">
-    <a href="https://github.com/Apollonaut-dev?tab=repositories">
-      <img src="/assets/GitHub_Logo.png" />
+  <link rel="stylesheet" type="text/css" href="projects.css" />
+  <figure class="github-link">
+    <a class="link" href="https://github.com/Apollonaut-dev?tab=repositories">
+      <img alt="Git" src="/assets/GitHub_Logo.png" />
+      <figcaption>
+        My Github Repositories
+      </figcaption>
     </a>
   </figure>
   <hr />
@@ -10,84 +14,221 @@
     <h3 class="article-header">This website</h3>
     <h4 class="article-subheader">From raw HTTP handling to server-side MVC</h4>
     <p class="text-paragraph">
-      I created this website at the beginning of my self-education in web-development. The first version used only vanilla node, html, css and javascript. This required me to manually manage filesystem access and HTML rendering when composing HTML files. I decided to manage routing by creating a master sitemap.json file which was a hash of all routes to an object containing their Content-Type and a pointer to the associated resource. I soon ran into a problem with this approach when dealing with form data submitted by POST. This first project gave me insight into how HTTP works when the abstractions are stripped away. I also learned a little about the considerations of creating a server.
+      This is my home on the World Wide Web. I created this website at the beginning of my self-education in
+      web-development. The first version used only
+      vanilla <code>node.js</code>, HTML, CSS and JavaScript. This required me to manually manage filesystem access and
+      HTML rendering
+      when composing HTML files. I decided to manage routing by creating a master sitemap.json file which was a hash of
+      all routes to an object containing their Content-Type and a pointer to the associated resource. I soon ran into a
+      problem with this approach when dealing with form data submitted by POST. This first project gave me insight into
+      how HTTP and webservers work when the abstractions are stripped away.
     </p>
     <p class="text-paragraph">
-      When I realized the awkwardness of trying to compose HTML manually and the reinventing-of-the-wheel I was doing by creating a node server from scratch, I decided to switch approaches to use Express for the backend framework and EJS to manage the frontend part. I later understood this would become a Model-View-Controller (at least, once I learn the best way to store blog posts in a database). Express makes it easy to manage and connect requests with resources. The EJS templating engine makes the frontend programming more manageable and reduces code repetition through composition of .ejs templates.
+      When I realized the awkwardness of trying to compose HTML manually and the reinventing-of-the-wheel I was doing by
+      creating a node server from scratch, I decided to switch approaches to use Express for the backend framework and
+      EJS to manage the frontend part. I later understood this would become a Model-View-Controller (at least, once I
+      learn the best way to store blog posts in a database). Express makes it easy to manage and connect requests with
+      resources. The EJS templating engine makes the frontend programming more manageable and reduces code repetition
+      through composition of .ejs templates.
     </p>
     <p class="text-paragraph">
-      I will continue using this project as a sort of full-stack laboratory from development, to testing (coming soon) to deployment. The next version I will create will separate the back and front into a REST API CMS for blog and project post data and an SPA 
+      I will continue using this project as a sort of full-stack laboratory from development, to testing (coming soon)
+      to deployment. The next version I will create will separate the back and front into a REST API CMS for blog and
+      project post data and an SPA
+    </p>
+    <p class="text-paragraph">
+      <p class="TODO text-paragraph">// TODO</p>
+      Resize images<br />
+      Dynamically populate content from a database<br />
+      Previews for this page which link to individual project pages (yes, I am currently typing this entire page
+      manually in one ejs file)<br />
+      Properly manage assets and compress video (AWS should be taking care of this currently)<br />
+      Webcomponents?<br />
     </p>
     <a class="link project-link" href="https://github.com/Apollonaut-dev/Project.me">GitHub Repo Link</a>
   </article>
-  <br /><hr />
+  <br />
+  <hr />
+  <article class="blog-post project-post">
+    <h3 class="article-header">Track.me</h3>
+    <h4 class="article-subheader">Work in progress</h4>
+    <p class="text-paragraph">
+      Create trackers to measure time-series data about various habits, skills, moods, diet, or any other quantifiable
+      pattern of behaviour. Compare, overlay, draw correlations and utilize Track.me’s visualization features to help
+      you understand yourself and how to change your behaviour.
+    </p>
+    <p class="text-paragraph">
+      I am creating this as my first real production app. Once I figure things out using technologies I already know
+      (React) I'll create an Android version. Because I eventually want to deploy it on multiple platforms, I have
+      created this as a full stack app so that the backend is separated by a clean REST API. I am using
+      <code>Chart.js</code> for visualization.
+    </p>
+    <p class="text-paragraph">
+      The client is a simple <code>create-react-app</code> which connects to my RESTful manually-created JWT
+      authentication endpoints. The backend is created using <code>node.js</code>, <code>Express.js</code>, MongoDB for
+      a database and Mongoose for an ODM. Nodemailer sends the emails and Socket.io pushes reminders to input data.
+    </p>
+    <p>
+      Technologies used:<br />
+      <code>
+        API: node.js / Express / JWT / MongoDB / Mongoose / Mocha+Chai+Sinon
+      </code><br />
+      <code>
+        Client: React / CSS Modules / Chart.js
+      </code>
+    </p>
+    <a class="link project-link" href="https://github.com/Apollonaut-dev/Track.me">GitHub Repo Link</a>
+  </article>
+  <br />
+  <hr />
   <article class="blog-post project-post">
     <h3 class="article-header">Social Media REST API</h3>
     <h4 class="article-subheader">Now with authorization!</h4>
-    <p class="text-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, porro exercitationem ex expedita labore eum error cum architecto nam soluta ab alias minima ea veniam, sunt quas excepturi assumenda deserunt?</p>
+    <p class="text-paragraph">
+      Educational project to learn how to create REST APIs, use Socket.io to asynchronously push data (status updates),
+      and hook them up with automated testing. Allows users to authenticate and access a route-protected feed. Created
+      as an
+      assignment from a course on Udemy.
+    </p>
+    <p>
+      Technologies used: <br />
+      <code>node.js / Express / JWT / MongoDB / Mongoose / Mocha+Chai+Sinon / Socket.io</code>
+    </p>
     <a class="link project-link" href="https://github.com/Apollonaut-dev/REST_TEST">GitHub Repo Link</a>
   </article>
-  <br /><hr />
+  <br />
+  <hr />
   <article class="blog-post project-post">
     <h3 class="article-header">Book Shop</h3>
     <h4 class="article-subheader">Server-Rendered MVC Using Express, EJS, & MongoDB</h4>
-    <p class="text-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, porro exercitationem ex expedita labore eum error cum architecto nam soluta ab alias minima ea veniam, sunt quas excepturi assumenda deserunt?</p>
-    <a class="link project-link" href="https://github.com/Apollonaut-dev/REST_TEST">GitHub Repo Link</a>
+    <p class="text-paragraph">
+      Educational project to learn about server-rendered webapps, merchant websites, handling file uploads and form
+      submissions, authentication, authorization and payment processing. Completed as an assignment from a course on
+      Udemy.
+    </p>
+    <p>
+      Technologies used: <br />
+      <code>node.js / Express / MongoDB / Mongoose / EJS / Sessions / Nodemailer / Stripe</code>
+      <a class="link project-link" href="https://github.com/Apollonaut-dev/BookShop">GitHub Repo Link</a>
   </article>
-  <br /><hr />
-  <article class="blog-post project-post"> 
+  <br />
+  <hr />
+  <article class="blog-post project-post">
+    <h3 class="article-header">React-Firebase Integrated Webapp Template</h3>
+    <h4 class="article-subheader">Server-Rendered MVC Using Express, EJS, & MongoDB</h4>
+    <p class="text-paragraph">
+      A template React app with well-encapsulated Firebase integration. An educational project to work on my React skills
+      and deep-dive into the Firebase Cloud Platform.
+    </p>
+    <p>
+      Technologies used: <br />
+      <code>
+        React / Firebase Cloud Functions / Firebase Database / Firebase Authentication
+      </code>
+      <a class="link project-link" href="https://github.com/Apollonaut-dev/ReactFirebaseBoilerplate">GitHub Repo
+        Link</a>
+  </article>
+  <br />
+  <hr />
+  <article class="blog-post project-post">
     <h3 class="article-header">MECHOSYSTEM</h3>
     <h4 class="article-subheader">Why I decided to pursue computer engineering</h4>
     <p class="text-paragraph">
-      "Mech-O-System" was the title of a project given to first year mechanical engineering students at the University of Waterloo. This is the course that introduced me to the fundamentals of engineering and it is in this class that undergraduate journey begins. It is also the reason I decided to switch career paths and pursue computer engineering instead.
+      "Mech-O-System" was the title of a project given to first year mechanical engineering students at the University
+      of Waterloo. This is the course that introduced me to the fundamentals of engineering and it is in this class that
+      undergraduate journey begins. It is also the reason I decided to switch career paths and pursue computer
+      engineering instead.
     </p><br />
     <figure id="mechosystem-video" class="projects-figure">
-        <video width="100%" height="100%" controls poster="/assets/mechosystem-picture">
-          <source src="/assets/mechosystem-video.mp4" type="video/mp4">
-        </video>
-        <figcaption>
-          A video of what it would look like if Her Majesty Queen Elizabeth II required a cutting-edge prosthetic
-        </figcaption>
-      </figure>
-      <br />
+      <video width="100%" height="100%" controls poster="/assets/mechosystem-picture">
+        <source src="/assets/mechosystem-video.mp4" type="video/mp4">
+      </video>
+      <figcaption>
+        A video of what it would look like if Her Majesty Queen Elizabeth II required a cutting-edge prosthetic
+      </figcaption>
+    </figure>
+    <br />
     <p class="text-paragraph">
-      The project was supposed to be a pedagogical simulation of a typical process an engineering firm would have for analyzing, bidding on, and completing a contract for a client. The client in this case was the teaching staff consisting of professors M. Collins, C. Hull, and A. Trivett. The 'RFP' was to build a demonstration of mechanical principles. We were to follow a typical engineering process: gathering and analysis of constraints and criteria, assignment of responsibilities, as well as time and dependency analysis. The requirement was to make something innovative, interactive, and something that would serve as marketing material for the Fall 2015 Engineering Open House for prospective UW Engineering students. We were to show these high school students just how much they could accomplish in just one short year of UW Engineering. The constraints were a list of materials and tools we were allowed to use. This list included Lego NXT Robotics kits, pre-fabricated construction materials, power electronics devices such as servos and oscillators, a plexi-class laser cutter, several 3D printers and anything we could find and/or be trained to use in the Mechanical and Mechatronics Engineering Machine Shop.
+      The project was supposed to be a pedagogical simulation of a typical process an engineering firm would have for
+      analyzing, bidding on, and completing a contract for a client. The client in this case was the teaching staff
+      consisting of professors M. Collins, C. Hull, and A. Trivett. The 'RFP' was to build a demonstration of mechanical
+      principles. We were to follow a typical engineering process: gathering and analysis of constraints and criteria,
+      assignment of responsibilities, as well as time and dependency analysis. The requirement was to make something
+      innovative, interactive, and something that would serve as marketing material for the Fall 2015 Engineering Open
+      House for prospective UW Engineering students. We were to show these high school students just how much they could
+      accomplish in just one short year of UW Engineering. The constraints were a list of materials and tools we were
+      allowed to use. This list included Lego NXT Robotics kits, pre-fabricated construction materials, power
+      electronics devices such as servos and oscillators, a plexi-class laser cutter, several 3D printers and anything
+      we could find and/or be trained to use in the Mechanical and Mechatronics Engineering Machine Shop.
     </p><br />
     <p class="text-paragraph">
-      After many long nights of tomfoolery and technical experimentation, I had come up with the idea of building a prosthetic of a human hand. We were to mimic the musculoskeletal mechanics of the genuine organic version. So, we-decided to use tendon-like structures to control the positioning of the hand. In the end we wouldn't be able to work out a design that made it feasible to make all the degrees of freedom work this way, but we did get fist-closing and opening and, wrist pitch to be actuated with systems of fishing wire, cleverly drilled holes and servor motors. 
+      After many long nights of tomfoolery and technical experimentation, I had come up with the idea of building a
+      prosthetic of a human hand. We were to mimic the musculoskeletal mechanics of the genuine organic version. So,
+      we-decided to use tendon-like structures to control the positioning of the hand. In the end we wouldn't be able to
+      work out a design that made it feasible to make all the degrees of freedom work this way, but we did get
+      fist-closing and opening and, wrist pitch to be actuated with systems of fishing wire, cleverly drilled holes and
+      servor motors.
     </p><br />
     <figure id="mechosystem-picture" class="projects-figure">
-      <img style ="height: 533px; width:300px;" src="/assets/mechosystem-picture.jpg" alt="HTML5" />
+      <img alt="Mechosystem Diagram" style="height: 533px; width:300px;" src="/assets/mechosystem-picture.jpg"
+        alt="HTML5" />
       <figcaption>
         The completed hand-model
       </figcaption>
     </figure><br />
     <p class="text-paragraph">
-      Our first prototype failed, miserably. It was structurally unstable. We had not considered the weight of the forearm, the stress of the tendon rotation and pitch (it turns out there is a lot of wasted force in your forearms) or the brittleness of the 3D printed plastic. We then discovered we could build the rest of the model in solidworks (instead of just the parts we needed 3D printed) and run stress/strain simulations to see where the weak points were. With a counterweight added, structural reinforcement and some targeted redesign we were able to test the degrees of motion independently with success -- the structure held up!
+      Our first prototype failed, miserably. It was structurally unstable. We had not considered the weight of the
+      forearm, the stress of the tendon rotation and pitch (it turns out there is a lot of wasted force in your
+      forearms) or the brittleness of the 3D printed plastic. We then discovered we could build the rest of the model in
+      solidworks (instead of just the parts we needed 3D printed) and run stress/strain simulations to see where the
+      weak points were. With a counterweight added, structural reinforcement and some targeted redesign we were able to
+      test the degrees of motion independently with success -- the structure held up!
     </p><br />
     <p class="text-paragraph">
-      At this point in the project, I knew I liked programming. So me and a group member, Mark, took the lead on this front. We were using Lego's proprietary RobotC library to write C sketches to the NXT Brick and communicate with the actuators and sensors. All was going well. We settled on using an Xbox-360 controller for input and Microsoft's API was easy enough to use. However, we ran into several problems on the software side.
+      At this point in the project, I knew I liked programming. So me and a group member, Mark, took the lead on this
+      front. We were using Lego's proprietary RobotC library to write C sketches to the NXT Brick and communicate with
+      the actuators and sensors. All was going well. We settled on using an Xbox-360 controller for input and
+      Microsoft's API was easy enough to use. However, we ran into several problems on the software side.
     </p><br />
     <p class="text-paragraph">
-      The first, and easiest to figure out, was that we had motion even without providing any input to the controller. The simple fix was to add a constant dead-zone to continuous inputs so that a minimum amount of input would be required before sending it to the actuator. The second problem was that we couldn't actuate more than one actuator at a time. This is when I discovered the difference between two fundamental design patterns in computer engineering: polling and interrupts.
+      The first, and easiest to figure out, was that we had motion even without providing any input to the controller.
+      The simple fix was to add a constant dead-zone to continuous inputs so that a minimum amount of input would be
+      required before sending it to the actuator. The second problem was that we couldn't actuate more than one actuator
+      at a time. This is when I discovered the difference between two fundamental design patterns in computer
+      engineering: polling and interrupts.
     </p><br />
     <p class="text-paragraph">
-      Our design up to this point consisted of a single loop in which all the sensors were observed at the top and all the actuators actuated at the bottom. However, the architecture of the NXT Brick was such that it couldn't communicate with more than one actuator in a single polling loop. With the help of our TAs, Yash, Yasser and Google, we learned we needed to register some Interrupt Service Routines before entering the loop and map them to the 360 controller's inputs. This way, the NXT CPU could suspend the main loop and handle the inputs as they were queued up by the interrupt handlers and then return to the non-time-critical tasks in the main loop after sending output to the actuators.
+      Our design up to this point consisted of a single loop in which all the sensors were observed at the top and all
+      the actuators actuated at the bottom. However, the architecture of the NXT Brick was such that it couldn't
+      communicate with more than one actuator in a single polling loop. With the help of our TAs, Yash, Yasser and
+      Google, we learned we needed to register some Interrupt Service Routines before entering the loop and map them to
+      the 360 controller's inputs. This way, the NXT CPU could suspend the main loop and handle the inputs as they were
+      queued up by the interrupt handlers and then return to the non-time-critical tasks in the main loop after sending
+      output to the actuators.
     </p><br />
     <p class="text-paragraph">
-      Though it seems like a near-trivial problem now, researching and fixing this functionality was very difficult at the time. Figuring out the solution simultaneously overwhelmed and awed me. We were introduced to many facets of computer engineering at once, such as CPU context-switching, interrupt handling, how to write an ISR, the memory-mapping of devices (and the software-handled interrupts of the NXT architecture) and the design patterns of tight-polling and interrupt driven execution. This project was one of the major reasons I worked hard to get the > 80 average it would take to transfer to computer engineering. 
+      Though it seems like a near-trivial problem now, researching and fixing this functionality was very difficult at
+      the time. Figuring out the solution simultaneously overwhelmed and awed me. We were introduced to many facets of
+      computer engineering at once, such as CPU context-switching, interrupt handling, how to write an ISR, the
+      memory-mapping of devices (and the software-handled interrupts of the NXT architecture) and the design patterns of
+      tight-polling and interrupt driven execution. This project was one of the major reasons I worked hard to get the >
+      80 average it would take to transfer to computer engineering.
     </p><br />
-    <p class="text-paragraph"> 
-      Our final task of the project was to prepare an automated demonstration of the functionality of our Mech-O-System. Linked below is a video of that demonstration, as well as a Google Document of the final 'proposal' we handed in to our professors. Unfortunately, I no longer have access to the source code.
+    <p class="text-paragraph">
+      Our final task of the project was to prepare an automated demonstration of the functionality of our Mech-O-System.
+      Linked below is a video of that demonstration, as well as a Google Document of the final 'proposal' we handed in
+      to our professors. Unfortunately, I no longer have access to the source code.
     </p>
     <section class="doc-link mechosystem-link">
       <figure class="projects-figure">
-        <a href="https://docs.google.com/document/d/1povKFxPGQrsb-X7zxHK9Iw49ecJXp-EHaMa2SDI4Ibc/edit?usp=sharing"><img src="https://img.icons8.com/color/96/000000/google-docs.png"></a>
+        <a href="https://docs.google.com/document/d/1povKFxPGQrsb-X7zxHK9Iw49ecJXp-EHaMa2SDI4Ibc/edit?usp=sharing"><img
+            alt="Google Doc" src="https://img.icons8.com/color/96/000000/google-docs.png"></a>
         <figcaption>
           Final Report Google Doc
         </figcaption>
       </figure>
     </section>
-    <br /><hr />
+    <br />
+    <hr />
   </article>
 </section>

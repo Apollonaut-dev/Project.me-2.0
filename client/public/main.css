@@ -17,6 +17,10 @@ after creating proper data models for content, get the content css up to the sam
   --clr-accent: #41658a;
   --clr-light: rgba(255, 255, 255, 1);
   --clr-dark: rgb(54, 59, 59);
+  --header-height: 8rem;
+  --header-padding: 1rem;
+  --nav-width-full: 6rem;
+  --nav-width-mobile: 50vw;
 }
 
 *, *::before, *::after {
@@ -26,24 +30,21 @@ after creating proper data models for content, get the content css up to the sam
 }
 
 body {
-  /* Nesting the burger button in the header didn't make sense, but this value is required for positioning */
-  --header-height: 100px;
-  --header-padding: 1rem;
   font-family: "Source Sans Pro";
   font-weight: 400;
   line-height: 1.5rem;
   min-height: 100vh;
   display: grid;
-  grid-template-areas: "header header header" "nav main main" "footer footer footer";
-  grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: auto 1fr 4rem;
-  height: 100vh;
+  grid-template-areas:  "header header header"
+                        "nav main ."
+                        "footer footer footer";
+  grid-template-columns: auto minmax(1fr, 60rem) auto;
+  grid-template-rows: auto 1fr auto;
 }
 
 @media screen and (max-width: 720px) {
   body {
     --header-height: 80px;
-
     grid-template-areas: "header" "main" "footer";
     grid-template-columns: 100%;
   }
@@ -52,7 +53,7 @@ body {
 /* GLOBAL */
 
 .container {
-  padding: 1rem 0;
+  padding: 1rem;
   width: 95%;
   max-width: 60rem;
   margin: 0 auto;
@@ -112,7 +113,8 @@ body {
   grid-area: header;
   display: block;
   background-color: var(--clr-primary);
-  height: calc(var(--header-height) + 2*var(--header-padding));
+  height: var(--header-height);
+  padding: var(--header-padding);
   z-index: 10;
 }
 
@@ -120,8 +122,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: var(--header-height);
-  margin: var(--header-padding);
+  height: 100%;
 }
 
 @media screen and (max-width: 720px) {
@@ -158,17 +159,53 @@ body {
   }
 }
 
+/* NAVIGATION */
+
+.nav-sidebar {
+  grid-area: nav;
+  display: inline-block;
+  position: sticky;
+  top: 0;
+  left: 0;
+  max-height: 100vh;
+  z-index: 100;
+  width: var(--nav-width-full);
+}
+
+@media screen and (max-width: 720px) {
+  .nav-sidebar {
+    position: fixed;
+    grid-area: none;
+    width: var(--nav-width-mobile);
+  }
+}
+
+/* Backdrop */
+.backdrop { 
+  display: block; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 2;
+}
+.backdrop.hidden { 
+  display: none;
+}
+
 /*Mobile Nav Button*/
 
 .nav__btn {
   display: none;
   position: fixed;
   left: 1rem;
-  top: calc(0.5*var(--header-height) + var(--header-padding));
+  top: calc(0.5*var(--header-height));
   transform: translateY(-50%);
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
-  z-index: 12;
+  z-index: 6;
 }
 
 .nav__btn>.burger-patty, .nav__btn>.burger-patty::before, .nav__btn>.burger-patty::after {
@@ -177,15 +214,12 @@ body {
   transition: all 0.2s cubic-bezier(0.77, .83, .6, 1.3);
 }
 
-@media screen and (max-width: 720px) {
-  .nav__btn {
-    display: initial;
-  }
-}
-
-.nav__btn.active {
-  background-color: var(--clr-primary-dark);
-  box-shadow: 0 0 10px black inset;
+.nav__btn.active,
+.nav__btn:active,
+.nav__btn:focus {
+  background-color: rgba(0,0,0,0.2);
+  box-shadow: 0 0 3px black inset;
+  outline: none;
 }
 
 .nav__btn.active>.burger-patty::before {
@@ -194,6 +228,7 @@ body {
 
 .nav__btn.active>.burger-patty {
   background-color: rgba(0, 0, 0, 0);
+  box-shadow: none;
   /*opacity applies to pseudoelements too*/
 }
 
@@ -202,49 +237,39 @@ body {
   box-shadow: 0 0 10px black;
 }
 
-/*Navigation*/
-
-.nav-sidebar {
-  grid-area: nav;
-  --nav-width: 50vw;
-  z-index: 12;
-}
-
 @media screen and (max-width: 720px) {
-  .nav-sidebar {
-    position: fixed;
-    grid-area: none;
-    width: var(--nav-width);
+  .nav__btn {
+    display: initial;
   }
 }
 
 .nav-primary {
-  position: sticky;
-  top: 0;
-  left: 0;
+  display: block;
+  margin: auto;
   background-color: none;
   transition: left 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  z-index: 4;
 }
 
-.nav-primary::after {
+/* .nav-primary::after {
   content: "";
   display: inline-block;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 0;
-  height: 80%;
+  top: 0;
+  right: 1rem;
+  height: 8rem;
   width: 1px;
+  transform: translateY(50%);
   background-color: var(--clr-primary-dark);
   transition: color 0.2s ease-in, box-shadow 0.2s ease-in;
-}
+} */
 
 @media screen and (max-width: 720px) {
   .nav-primary {
     position: fixed;
     height: 100vh;
-    width: var(--nav-width);
-    left: calc((-1)*var(--nav-width));
+    width: var(--nav-width-mobile);
+    left: calc((-1)*var(--nav-width-mobile));
     padding-top: calc(var(--header-height) + 2*var(--header-padding));
     background-color: var(--clr-primary);
     box-shadow: -25px 0 80px black;
@@ -256,28 +281,29 @@ body {
 }
 
 .nav-primary>ul {
-  width: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .nav-primary>ul>li {
   display: block;
-  width: inherit;
-  height: 4rem;
+  text-align: center;
+  height: 100%;
+  width: 100%;
 }
 
 .nav__link {
-  display: flex;
-  width: 100%;
+  display: inline-block;
   height: 100%;
+  width: 100%;
+  padding: var(--header-padding);
   text-decoration: none;
-  justify-content: center;
-  align-items: center;
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 500;
   color: var(--clr-primary-fade);
   text-shadow: 0 0 5px var(--clr-primary-dark), 0 0 20px var(--clr-dark);
-  /* 0 0 40px var(--clr-dark); */
   transition: background-color 0.2s ease-out, color 0.2s ease-out, text-shadow 0.2s ease-out;
 }
 
@@ -310,12 +336,13 @@ main {
   text-align: center;
   align-items: center;
   justify-content: center;
+  padding: var(--header-padding);
   color: white;
   background-color: black;
   font-weight: 200;
 }
 
-/* Content styles */
+/* Generic Content Styles */
 
 .text-paragraph {
   text-indent: 1rem;
@@ -341,6 +368,7 @@ main {
 
 .link {
   text-decoration: none;
+  color: var(--clr-primary);
 }
 
 .link:hover {
@@ -355,27 +383,19 @@ main {
   color: var(--clr-primary);
 }
 
-.resume__github-card {
-  color: var(--clr-primary);
-}
-
-.resume__github-card:hover {
-  color: var(--clr-accent);
-}
-
-.resume__github-card img {
+.github-link {
   display: block;
   margin: auto;
-  max-width: 8rem;
-}
-
-.resume__github-card figcaption {
   text-align: center;
 }
 
-.resume__github-card a {
-  text-decoration: none;
-  color: inherit;
+.github-link a {
+  display: block; 
+  margin: auto;
+}
+
+.github-link img {
+  width: 10rem;
 }
 
 .projects-figure {
@@ -413,10 +433,4 @@ main {
   margin: auto; 
   text-align: center;
   padding: 1rem;
-}
-
-/*Specific one-off/ID styles*/
-#about-me>.article-subheading {
-  font-family: "Source Code Pro";
-  color: orange;
 }

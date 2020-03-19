@@ -12,26 +12,30 @@
   </nav>
   <div class="btn btn-burger nav__btn">
     <div class="burger-patty"><span></span></div>
-  </div>    
+  </div>
+  <div class="backdrop hidden"></div>
   <script>
     (function () {
-      let navToggle, sidebar, navPrimary;
-      if (!navToggle) {
-        navToggle = document.querySelector('.nav__btn');
-        navToggle.addEventListener('click', function () {
-          if (!sidebar) sidebar = document.querySelector('.nav-sidebar');
-          if (!navPrimary) navPrimary = document.querySelector('.nav-primary');
+      const navToggle = document.querySelector('.nav__btn');
+      const backdrop = document.querySelector('.backdrop');
+      const sidebar = document.querySelector('.nav-sidebar');
+      const navPrimary = document.querySelector('.nav-primary');
 
-          if (sidebar.classList.contains('active')) {
-            sidebar.classList.remove('active');
-            navToggle.classList.remove('active');
-            navPrimary.classList.remove('active');
-          } else {
-            sidebar.classList.add('active');
-            navToggle.classList.add('active');
-            navPrimary.classList.add('active');
-          }
-        })
+      navToggle.addEventListener('click', toggleNav);
+      backdrop.addEventListener('click', toggleNav);
+
+      function toggleNav() {
+        if (sidebar.classList.contains('active')) {
+          sidebar.classList.remove('active');
+          navToggle.classList.remove('active');
+          navPrimary.classList.remove('active');
+          backdrop.classList.add('hidden');
+        } else {
+          sidebar.classList.add('active');
+          navToggle.classList.add('active');
+          navPrimary.classList.add('active');
+          backdrop.classList.remove('hidden');
+        }
       }
     })();
 
