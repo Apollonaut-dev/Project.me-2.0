@@ -19,6 +19,7 @@ app.set('view engine', 'ejs');
 app.set('views', './client/views');
 
 app.use((req, res, next) => {
+  console.log(req.protocol + '://' + req.get('host') + req.originalUrl);
   console.log(req.connection.remoteAddress);
   next();
 });
